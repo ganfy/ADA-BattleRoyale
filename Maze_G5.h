@@ -68,7 +68,7 @@ struct Laberinto {
                         nodos_tope[j] = ini;
                     }
 
-                    else if (data[i][j - 1] == "y") {  //si la salida está a la izquierda
+                    if (data[i][j - 1] == "y") {  //si la salida está a la izquierda
                         fin = new Nodo(i, j - 1);
                         nodo_izq = fin;
                         prev = true;
@@ -104,7 +104,7 @@ struct Laberinto {
                         nodo_izq = n;
                     }
                     else { // # . #
-                        if (data[i - 1][j] == "#" || data[i + 1][j] == "#") { //sin salida
+                        if (data[i - 1][j] != "." || data[i + 1][j] != ".") { //sin salida
                             n = new Nodo(i, j);
                         }
                     }
@@ -139,7 +139,7 @@ struct Laberinto {
                         (*t).contiguos[2] = ini;
                         (*ini).contiguos[0] = t;
                     }
-                    else if (data[i][j + 1] == "y") { //si la salida está a la derecha
+                    if (data[i][j + 1] == "y") { //si la salida está a la derecha
                         fin = new Nodo(i, j + 1);
                         if (nodo_izq) {
                             (*nodo_izq).contiguos[1] = fin;
@@ -194,9 +194,6 @@ void MatrixDeTxt(vector<vector<string>>& mat, string path, int f, int c)
         vector<string> temp1;
         for (auto i = 0; i < length; i++)
         {
-            //string* temp = new string(1,buffer[i]);
-            //buffer2.push_back(*temp);
-            //delete temp;
             if (buffer[i] == '\n')
             {
                 mat.push_back(temp1);
@@ -333,7 +330,7 @@ void trazar(vector<vector<string>>& A, deque<Nodo*> d) {
 
 template <class TimeT = std::chrono::milliseconds,
     class ClockT = std::chrono::steady_clock>
-double maze_5(string text)
+    double maze_5(string text)
 {
     auto start = ClockT::now();
     vector<vector<string>> A;
@@ -343,9 +340,9 @@ double maze_5(string text)
     Laberinto lab(A, a, l);
     trazar(A, resolver(lab));
 
-    /*ofstream bd;
+    ofstream bd;
     bd.open("file.txt");
-
+    /*
     if (bd.is_open())
         for (int i = 0; i < l; i++) {
             for (int j = 0; j < a; j++) {
