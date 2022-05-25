@@ -342,9 +342,10 @@ void trazar(vector<vector<string>>& A, deque<Nodo*> d) {
     }
 }
 
+//----------------------------------------------------------------------------------------------------------------------------------------------------
 template <class TimeT = std::chrono::milliseconds,
     class ClockT = std::chrono::steady_clock>
-    double maze(string text)
+long long int maze(string text)
 {
     auto start = ClockT::now();
     vector<vector<string>> A;
@@ -372,9 +373,8 @@ template <class TimeT = std::chrono::milliseconds,
 
 }
 
-double maze_5() {
-    double tiempos = 0;
-    double t=0;
+long long int maze_5() {
+    long long int tiempos = 0, t;
     for (int i = 0; i < laberintos.size(); i++) {
         t= maze(laberintos[i]);
         cout << t << endl;   
